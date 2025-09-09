@@ -1,22 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import HeroSection from "../components/HeroSection";
+// import HeroSection from "../components/HeroSection";
 import KeyMetrics from "../components/KeyMetrics";
 import ProjectsSnapshot from "../components/ProjectsSnapshot";
 import ServicesHealth from "../components/ServicesHealth";
 import RecentReports from "../components/RecentReports";
 
-const sampleProjects = [
-  { id: 1, name: "Website Revamp", status: "In Progress" },
-  { id: 2, name: "Mobile App Launch", status: "Completed" },
-  { id: 3, name: "Server Migration", status: "Delayed" },
-];
+const sampleProjects = [];
 
-const sampleServices = [
-  { id: 1, name: "API Server", status: "Running" },
-  { id: 2, name: "Database", status: "Failed", recentAlert: "Connection timeout" },
-  { id: 3, name: "Auth Service", status: "Running" },
-];
+const sampleServices = [];
 
 const sampleIncidents = [
   { id: 1, title: "API Outage", status: "Open", date: "2025-09-02" },
@@ -57,21 +49,20 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-    fetchCounts(); // ✅ Correct function call
+    fetchCounts(); 
   }, []);
 
   if (loading) return <p className="text-center">Loading dashboard...</p>;
 
   return (
     <div>
-      <HeroSection />
 
       <section className="py-12 px-6">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Key Metrics Overview</h2>
 
         <KeyMetrics
-          totalProjects={totalProjects} // ✅ Use dynamic data
-          runningServices={runningServices} // ✅ Use dynamic data
+          totalProjects={totalProjects}
+          runningServices={runningServices}
           activeIncidents={sampleIncidents.filter(i => i.status === "Open").length}
           recentUpdates={5}
         />

@@ -14,7 +14,6 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName, onLogout }) => {
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md">
-      {/* Logo */}
       <div className="flex items-center gap-2">
         <span className="text-xl font-bold">Wiki Tsehay</span>
       </div>
@@ -83,18 +82,18 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName, onLogout }) => {
               ) : (
                 <>
                   <Link
-                    to="/login"
+                    to="/logout"
                     className="block px-4 py-2 hover:bg-gray-100"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Login
+                    Logout
                   </Link>
                   <Link
-                    to="/register"
+                    to="#"
                     className="block px-4 py-2 hover:bg-gray-100"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Register
+                    Settings
                   </Link>
                 </>
               )}
