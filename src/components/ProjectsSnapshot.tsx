@@ -13,7 +13,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const statusColors: Record<Project["status"], string> = {
   "Not Started": "bg-gray-200 text-gray-800",
   "In Progress": "bg-blue-100 text-blue-800",
-  Completed: "bg-green-100 text-green-800",
+  "Completed": "bg-green-100 text-green-800",
   "On Hold": "bg-yellow-100 text-yellow-800",
 };
 

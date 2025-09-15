@@ -15,9 +15,11 @@ export default tseslint.config([
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],
+    'react/prop-types': 'off',
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+
   },
 ])

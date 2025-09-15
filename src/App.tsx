@@ -1,6 +1,6 @@
 import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import Services from "./pages/Services";
-import About from "./pages/About";
+import Users from "./pages/Users";
 import Projects from "./pages/Projects";  
 import RootLayout from "./layout/RootLayout";
 import PageNotFound from "./pages/pageNotFound";
@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Logout from "./pages/Logout";
 import CreateOperationPage from "./Operations/CreateOperationPage";
 import CreateProjects from "./Projects/CreateProject";
+import ProjectDetailsPage from "./components/project/ProjectDetailsPage";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
             <Route path="services" element={<Services />} />
             <Route path="Reports" element={<Reports />} />
             <Route path="Incidents" element={<Incidents />} />
-            <Route path="About" element={<About />} />
+            <Route path="Users" element={<Users />} />
             <Route path="Contact" element={<Contact />} />
           </Route>
         </Route>
@@ -38,6 +39,7 @@ function App() {
         <Route path="logout" element={<Logout />} />
         <Route path="create-operation" element={<CreateOperationPage />} />
         <Route path="create-project" element={<CreateProjects />} />
+        <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
         <Route path="*" element={<PageNotFound />} />
       </>
     )
