@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent } from "@/components/ui/card";
+import EditIncidentsSection from "@/components/project/edit-project/EditIncidentsSection";
 
 interface IncidentResponse {
   id: number;
@@ -31,8 +32,9 @@ const IncidentsSection: React.FC<IncidentsSectionProps> = ({ projectId }) => {
   const [incidents, setIncidents] = useState<IncidentResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [editingIncidentId, setEditingIncidentId] = useState<number | null>(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
 
   useEffect(() => {
     const fetchIncidents = async () => {
@@ -70,8 +72,10 @@ const IncidentsSection: React.FC<IncidentsSectionProps> = ({ projectId }) => {
 
   if (loading) return <p className="text-gray-500">Loading incidents...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
-
   if (incidents.length === 0) return <p className="text-gray-500">No incidents found.</p>;
+
+  const user: User = JSON.parse(localStorage.getItem("user")!);
+  const departmentId = user.department;
 
   return (
     <div className="space-y-4">
@@ -90,6 +94,30 @@ const IncidentsSection: React.FC<IncidentsSectionProps> = ({ projectId }) => {
             </div>
             {incident.rootCause && <p className="mt-2 text-red-600">Root Cause: {incident.rootCause}</p>}
             {incident.actionTaken && <p className="mt-1 text-green-600">Action Taken: {incident.actionTaken}</p>}
+
+            <button
+              onClick={() => setEditingIncidentId(incident.id)}
+              className="mt-2 bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+            >
+              Edit Incident
+            </button>
+
+            {/* Render EditIncidentsSection if this incident is being edited */}
+            {editingIncidentId === incident.id && (
+              <div className="mt-4 border-t pt-4">
+                <EditIncidentsSection
+                  departmentId={departmentId}
+                  projectId={projectId}
+                  incidentId={incident.id}
+                />
+                <button
+                  onClick={() => setEditingIncidentId(null)}
+                  className="mt-2 text-sm text-red-600 hover:underline"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
           </CardContent>
         </Card>
       ))}

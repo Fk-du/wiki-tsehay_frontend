@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import ProjectInfo from "@/components/project/ProjectInfo";
 import IncidentsSection from "@/components/project/IncidentsSection";
@@ -14,18 +13,18 @@ import {
 } from "@/components/ui/tabs";
 
 interface ProjectDetailsPageProps {
-  projectId?: number; // optional, will be read from URL if not passed
+  projectId?: number;
 }
 
 const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ projectId }) => {
   const params = useParams<{ projectId: string }>();
   const id = projectId ?? Number(params.projectId);
 
+
   if (!id) return <p>Project ID not found.</p>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Project Details</h1>
+    <div className="p-6 relative">
 
       <Tabs defaultValue="info" className="w-full">
         <TabsList className="grid w-full grid-cols-5">
@@ -56,6 +55,7 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ projectId }) =>
           <ProjectFilesSection projectId={id} />
         </TabsContent>
       </Tabs>
+
     </div>
   );
 };

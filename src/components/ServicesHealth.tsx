@@ -8,7 +8,7 @@ interface Service {
   recentAlert?: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
 
 const statusColors: Record<Service["status"], string> = {
   "Running": "bg-green-100 text-green-800",

@@ -8,7 +8,7 @@ interface Project {
   status: "Not Started" | "In Progress" | "Completed" | "On Hold";
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
 
 const statusColors: Record<Project["status"], string> = {
   "Not Started": "bg-gray-200 text-gray-800",

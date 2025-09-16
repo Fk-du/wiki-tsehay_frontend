@@ -21,7 +21,7 @@ const ProjectFilesSection: React.FC<ProjectFilesSectionProps> = ({ projectId }) 
   const [error, setError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
   const token = localStorage.getItem("token");
 
   const fetchFiles = async () => {

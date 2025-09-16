@@ -6,7 +6,7 @@ const Logout: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
 
   useEffect(() => {
     const token = localStorage.getItem("token");

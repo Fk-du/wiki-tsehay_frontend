@@ -16,7 +16,7 @@ const sampleIncidents = [
   { id: 3, title: "Login Bug", status: "Resolved", date: "2025-08-30" },
 ];
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL_NETWORK || import.meta.env.VITE_API_BASE_URL_LOCAL;
 
 export default function Dashboard() {
   const [totalProjects, setTotalProjects] = useState<number>(0);
