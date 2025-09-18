@@ -4,6 +4,7 @@ import IncidentsSection from "@/components/project/IncidentsSection";
 import MilestonesSection from "@/components/project/MilestonesSection";
 import ProgressSection from "@/components/project/ProgressSection";
 import ProjectFilesSection from "@/components/project/ProjectFilesSection";
+import Header from "../Header";
 
 import {
   Tabs,
@@ -24,6 +25,16 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ projectId }) =>
   if (!id) return <p>Project ID not found.</p>;
 
   return (
+    <>
+    <Header 
+        isLoggedIn={!!localStorage.getItem("token")} 
+        onLogout={() => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          window.location.href = "/login"; 
+        }} 
+    />
+
     <div className="p-6 relative">
 
       <Tabs defaultValue="info" className="w-full">
@@ -57,6 +68,7 @@ const ProjectDetailsPage: React.FC<ProjectDetailsPageProps> = ({ projectId }) =>
       </Tabs>
 
     </div>
+    </>
   );
 };
 

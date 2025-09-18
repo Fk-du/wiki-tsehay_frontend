@@ -34,26 +34,41 @@ const ProjectsPage: React.FC = () => {
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const userData = localStorage.getItem("user");
-        if (!token || !userData) return;
-
-        const user = JSON.parse(userData);
-
-        const response = await axios.get<Project[]>(
-          `${API_BASE_URL}/api/projects/department/${user.department}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setProjects(response.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-
     fetchProjects();
   }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const userData = localStorage.getItem("user");
+      if (!token || !userData) return;
+
+      const user = JSON.parse(userData);
+
+      const response = await axios.get<Project[]>(
+        `${API_BASE_URL}/api/projects/department/${user.department}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setProjects(response.data);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
+
+  const handleDelete = async (projectId: number) => {
+    if (!confirm("Are you sure you want to delete this project?")) return;
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`${API_BASE_URL}/api/projects/${projectId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProjects((prev) => prev.filter((p) => p.id !== projectId));
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      alert("Failed to delete project. Please try again.");
+    }
+  }
+
 
   const filteredProjects = projects
     .filter((p) =>
@@ -147,9 +162,8 @@ const ProjectsPage: React.FC = () => {
                   >
                     View
                 </Link>
-
-                <button className="text-green-600 hover:underline">Edit</button>
-                <button className="text-red-600 hover:underline">Delete</button>
+                <button onClick={() => handleDelete(project.id)}
+                className="text-red-600 hover:underline">Delete</button>
               </div>
             </div>
           ))}

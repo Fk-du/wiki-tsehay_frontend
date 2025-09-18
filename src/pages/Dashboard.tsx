@@ -6,11 +6,15 @@ import ProjectsSnapshot from "../components/ProjectsSnapshot";
 import ServicesHealth from "../components/ServicesHealth";
 import RecentReports from "../components/RecentReports";
 
-const sampleProjects = [];
+interface Incident {
+  id: number;
+  title: string;
+  status: "Open" | "Resolved"; 
+  date: string;
+}
 
-const sampleServices = [];
 
-const sampleIncidents = [
+const sampleIncidents: Incident[] = [
   { id: 1, title: "API Outage", status: "Open", date: "2025-09-02" },
   { id: 2, title: "DB Latency", status: "Resolved", date: "2025-09-01" },
   { id: 3, title: "Login Bug", status: "Resolved", date: "2025-08-30" },
@@ -38,7 +42,7 @@ export default function Dashboard() {
         setTotalProjects(projectsRes.data);
 
         const servicesRes = await axios.get<number>(
-          `${API_BASE_URL}/operations/department/${user.department}/running/count`,
+          `${API_BASE_URL}/api/operations/department/${user.department}/running/count`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setRunningServices(servicesRes.data);
@@ -69,11 +73,11 @@ export default function Dashboard() {
 
         <div className="mt-8 flex flex-col md:flex-row gap-6">
           <div className="md:w-1/2">
-            <ProjectsSnapshot projects={sampleProjects} />
+            <ProjectsSnapshot />
           </div>
 
           <div className="md:w-1/2">
-            <ServicesHealth services={sampleServices} />
+            <ServicesHealth />
             <RecentReports incidents={sampleIncidents} />
           </div>
         </div>

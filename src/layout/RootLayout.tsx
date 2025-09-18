@@ -13,7 +13,15 @@ const RootLayout: React.FC = () => {
     
             <div>
             {/* Navbar */}
-                <Header />
+                <Header 
+                    isLoggedIn={!!localStorage.getItem("token")} 
+                    onLogout={() => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user");
+                        window.location.href = "/login"; 
+                    }} 
+                    />
+
             </div>
             {/* Sidebar + Content */}
             <div className="flex flex-1 bg-t ransparent">

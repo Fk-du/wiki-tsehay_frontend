@@ -43,7 +43,7 @@ const OperationsPage: React.FC = () => {
 
         const user = JSON.parse(userData);
         const res = await axios.get<Operation[]>(
-          `${API_BASE_URL}/operations/department/${user.department}`,
+          `${API_BASE_URL}/api/operations/department/${user.department}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setOperations(res.data);

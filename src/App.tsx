@@ -16,6 +16,8 @@ import Logout from "./pages/Logout";
 import CreateOperationPage from "./Operations/CreateOperationPage";
 import CreateProjects from "./Projects/CreateProject";
 import ProjectDetailsPage from "./components/project/ProjectDetailsPage";
+import OperationDetailsPage from "./components/operation/info/OperationDetailsPage";
+
 
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
         <Route path="create-operation" element={<CreateOperationPage />} />
         <Route path="create-project" element={<CreateProjects />} />
         <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
+        <Route path="/test-operation" element={<OperationDetailsPage />} />
         <Route path="*" element={<PageNotFound />} />
       </>
     )
